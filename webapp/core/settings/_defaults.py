@@ -14,6 +14,7 @@ class Defaults:
         "rest_framework_simplejwt",
         "drf_yasg",
         "corsheaders",
+        "daphne",
     ]
 
     MIDDLEWARE = [

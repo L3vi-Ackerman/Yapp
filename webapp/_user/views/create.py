@@ -1,5 +1,5 @@
 from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny
 from serializers.profile import CreateProfileSerializer
 from serializers.user import RegisterUserSerializer
 
@@ -10,5 +10,5 @@ class RegisterUserView(CreateAPIView):
 
 
 class CreateProfileView(CreateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     serializer_class = CreateProfileSerializer

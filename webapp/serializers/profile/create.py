@@ -3,13 +3,13 @@ from rest_framework import serializers
 
 
 class CreateProfileSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
     class Meta:
         model = UserProfile
         fields = [
             "user",
             "username",
+            "first_name",
+            "last_name",
             "address",
             "phone",
             "bio",

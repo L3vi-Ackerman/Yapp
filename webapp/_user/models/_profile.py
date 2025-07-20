@@ -14,8 +14,18 @@ class UserProfile(AbstractBaseModel):
         on_delete=models.CASCADE,
     )
 
+    first_name = models.CharField(
+        max_length=25,
+        null=False,
+        blank=False,
+    )
+    last_name = models.CharField(
+        max_length=25,
+        null=False,
+        blank=False,
+    )
     username = models.CharField(
-        max_length=64,
+        max_length=25,
         unique=True,
     )
 

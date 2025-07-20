@@ -54,4 +54,8 @@ urlpatterns = [
         "user/",
         include("_user.urls"),
     ),
+    path(
+        "chat/",
+        include("chat.urls"),
+    ),
 ]

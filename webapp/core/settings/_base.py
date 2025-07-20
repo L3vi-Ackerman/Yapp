@@ -7,6 +7,7 @@ from core.settings._i18n import I18NSettings
 from core.settings._middlewares import MiddlewareSettings
 from core.settings._rest_framework import RestFrameworkSettings
 from core.settings._security import SecuritySettings
+from core.settings._sockets import SocketSettings
 from core.settings._static import StaticFileSettings
 from core.settings._swagger import SwaggerSettings
 from core.settings._templates import TemplatesSettings
@@ -28,6 +29,7 @@ class BaseSettings(
     SwaggerSettings,
     TokenSettings,
     Configuration,
+    SocketSettings,
 ):
     @classmethod
     def post_setup(cls):

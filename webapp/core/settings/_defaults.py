@@ -4,17 +4,17 @@ from dataclasses import dataclass
 @dataclass
 class Defaults:
     INSTALLED_APPS = [
+        "daphne",
+        "rest_framework",
+        "rest_framework_simplejwt",
+        "drf_yasg",
+        "corsheaders",
         "django.contrib.admin",
         "django.contrib.auth",
         "django.contrib.contenttypes",
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
-        "rest_framework",
-        "rest_framework_simplejwt",
-        "drf_yasg",
-        "corsheaders",
-        "daphne",
     ]
 
     MIDDLEWARE = [

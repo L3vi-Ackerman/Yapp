@@ -5,4 +5,7 @@ class AppsSettings:
     INSTALLED_APPS = D.INSTALLED_APPS + [
         "_user",
         "chat",
+        "message",
+        "membership",
+        "room",
     ]

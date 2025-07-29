@@ -1,8 +1,5 @@
 class CorsSettings:
-    ALLOWED_HOSTS = [
-        "localhost",
-        "127.0.0.1",
-    ]  # Accepts all hosts in development (not safe for prod)
+    ALLOWED_HOSTS = ["*"]
 
     CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins in development
 
@@ -17,7 +14,7 @@ class CorsSettings:
     #     "http://127.0.0.1:3000",
     # ]
 
-    CORS_ALLOW_CREDENTIALS = True  # Needed if frontend sends cookies or uses sessions
+    CORS_ALLOW_CREDENTIALS = True
 
     CORS_ALLOW_HEADERS = [
         "accept",

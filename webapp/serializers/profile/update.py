@@ -5,13 +5,7 @@ from rest_framework import serializers
 class UpdateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = [
-            "username",
-            "address",
-            "phone",
-            "bio",
-            "avatar",
-        ]
+        fields = "__all__"
         read_only_fields = [
             "id",
             "created_at",

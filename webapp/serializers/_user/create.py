@@ -1,8 +1,9 @@
-from _user.models import User, UserProfile
 from django.db import transaction
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from serializers.profile import CreateProfileSerializer
+
+from _user.models import User, UserProfile
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -18,7 +19,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
         required=True,
         max_length=25,
-        write_only=True,
         validators=[
             UniqueValidator(
                 queryset=UserProfile.objects.all(),
@@ -26,12 +26,11 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             )
         ],
     )
-    firstName = serializers.CharField(
+    first_name = serializers.CharField(
         required=True,
         max_length=25,
-        write_only=True,
     )
-    lastName = serializers.CharField(
+    last_name = serializers.CharField(
         required=True,
         max_length=25,
         write_only=True,
@@ -49,16 +48,12 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = [
+        fields = "__all__"
+        read_only_fields = [
             "id",
-            "email",
-            "password",
-            "password2",
-            "firstName",
-            "lastName",
-            "username",
+            "created_at",
+            "updated_at",
         ]
-        read_only_fields = ["id", "email"]
 
     def validate(self, attrs):
         if attrs["password"] != attrs["password2"]:
@@ -72,33 +67,27 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data: dict):
-        email = validated_data["email"]
-        password = validated_data.pop("password")
-        username = validated_data.pop("username")
-        firstName = validated_data.pop("firstName")
-        lastName = validated_data.pop("lastName")
-
         validated_data.pop("password2")
 
-        user = User(email=email)
-        user.set_password(password)
-        user.save()
+        email = validated_data["email"]
+        password = validated_data.pop("password")
 
         profile_data = {
-            "user": user.id,
-            "username": username,
-            "first_name": firstName,
-            "last_name": lastName,
+            "username": validated_data.pop("username"),
+            "first_name": validated_data.pop("first_name"),
+            "last_name": validated_data.pop("last_name"),
         }
 
-        profile_serializer = CreateProfileSerializer(data=profile_data)
+        user_obj = User.objects.create_user(
+            email,
+            password,
+        )
+
+        profile_serializer = CreateProfileSerializer(
+            data={**profile_data, "user": user_obj.id}
+        )
+
         profile_serializer.is_valid(raise_exception=True)
         profile_serializer.save()
 
-        if user.id is None:
-            raise serializers.ValidationError(
-                {
-                    "user": "Failed to create user",
-                }
-            )
-        return user
+        return user_obj

@@ -34,6 +34,11 @@ class UserProfile(AbstractBaseModel):
         blank=True,
     )
 
+    user_status = models.CharField(
+        choices=UserStatus.choices,
+        default=UserStatus.OFFLINE,
+    )
+
     address = models.CharField(
         max_length=40,
         blank=True,

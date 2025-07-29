@@ -3,7 +3,7 @@ from base.choices.typing_status import TypingStatusEnum
 from base.choices.user_status import UserStatusChoices
 
 __all__ = [
-    "TypingStatusChoices",
+    "TypingStatusEnum",
     "UserStatusChoices",
-    "RoomTypeEnum",
+    "RoomTypeChoices",
 ]

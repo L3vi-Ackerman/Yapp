@@ -37,6 +37,10 @@ urlpatterns = [
         include("gatekeeper.urls"),
     ),
     path(
+        "health/",
+        include("health.urls"),
+    ),
+    path(
         "user/",
         include("_user.urls"),
     ),

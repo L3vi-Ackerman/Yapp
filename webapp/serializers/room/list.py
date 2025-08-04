@@ -9,6 +9,7 @@ class ListRoomSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
+            "code",
             "group_name",
             "is_archived",
             "created_by",

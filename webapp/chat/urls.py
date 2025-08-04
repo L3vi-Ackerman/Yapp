@@ -9,7 +9,7 @@ urlpatterns = [
         name="index",
     ),
     path(
-        "<str:room_name>/",
+        "<str:code>/",
         views.room,
         name="room",
     ),

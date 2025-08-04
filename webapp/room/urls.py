@@ -14,7 +14,7 @@ urlpatterns = [
         name="list-room",
     ),
     path(
-        "retrieve/<str:name>/",
+        "retrieve/<str:code>/",
         RetrieveRoomView.as_view(),
         name="retrieve-room",
     ),

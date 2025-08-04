@@ -12,6 +12,10 @@ class RoomModel(AbstractBaseModel):
         blank=True,
         null=True,
     )
+    code = models.CharField(
+        max_length=32,
+        null=True,
+    )
     group_name = models.CharField(
         max_length=255,
         blank=True,

@@ -1,5 +1,4 @@
-from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from room.models import RoomModel
 
 
@@ -10,8 +9,6 @@ def index(request):
     )
 
 
-def room(request, room_name):
-    if not RoomModel.objects.filter(name=room_name).exists():
-        raise Http404("Room does not exist")
-
-    return render(request, "chat/room.html", {"room_name": room_name})
+def room(request, code):
+    room = get_object_or_404(RoomModel, code=code)
+    return render(request, "chat/room.html", {"room_name": room.name})

@@ -48,4 +48,8 @@ urlpatterns = [
         "chat/",
         include("chat.urls"),
     ),
+    path(
+        "room/",
+        include("room.urls"),
+    ),
 ]
